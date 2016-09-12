@@ -1,0 +1,19 @@
+#Script for building Zoltan only on a 64-bit Linux workstation
+#with OpenMPI.
+#This script builds only Zoltan from the Zoltan package directory.
+#Assuming running script from 
+#/home/chachen/Softwares/Zoltan_v3.82/build_dir/.
+#set path=(/usr/local/bin $path)
+export CFLAGS=-m64
+export CXXFLAGS=-m64
+export CPPFLAGS=-m64
+export FCFLAGS=-m64
+
+../configure -C \
+  --prefix=/home/chachen/Softwares/Zoltan_v3.82/build/ \
+  --with-mpi-compilers=yes \
+  --with-gnumake |& tee OUTPUT.C
+make everything -j 19 |& tee OUTPUT.M
+make install -j 19 |& tee OUTPUT.I
+
+
